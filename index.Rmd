@@ -1,0 +1,81 @@
+---
+title       : Historical Snow Fall in Chicago US
+subtitle    : Developing Data Product Project
+author      : Helen Huang
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap, interactive]            # {mathjax, quiz, bootstrap}
+ext_widgets : {rCharts: [libraries/nvd3,libraries/morris,libraries/polycharts]}
+mode        : selfcontained # {standalone, draft, selfcontained}
+knit        : slidify::knit2slides
+
+--- # Introduction and objectives
+
+## Executive summary
+
+As winter months in Chicago linger from Nov to April, snow is a serious weather event and can present challenges to the local residents and the authorities. 
+
+This simple, **interactive** app provides an unique opportunity for the viewers to search for historical snow falls in Chicago winter from Nov, 1958 till Nov, 2014. 
+
+Total monthly snow falls (inches) and concurrent average monthly air temperature (as max temp, min temp and average temp, F) are analyzed . 
+
+Searchable information are displayed as 'Snow Fall' graph, 'Air Temp' graph and also summarized in table output format under 'Data' tab. 
+
+(Data source: National Oceanic and Atmospheric Administration, NOAA, HTTP://WWW.nova.gov).
+
+--- #shiny app
+
+## Preview of 'Historical Chicago Snow Fall' app
+
+
+![myapp](./assets/img/snapshot1.png)
+
+
+**This is the link to the shiny app: https://helen.shinyapps.io/ChicagoSnow/**
+
+
+
+--- #snow plot
+
+## Total Monthly Snow Fall in Chicago (1958-present)
+
+Search the **interactive** plots by selecting year/month in the sidebar or hovering the mouse cursor over the graph.
+
+```{r, snow, echo = FALSE, results = 'asis'}
+require(rCharts)
+dat <- read.csv("NORR.csv")
+df1 <- subset(dat[, c("Date", "Snow.Fall")])
+df2 <- transform(df1, Date = as.character(strptime(df1$Date, format = "%Y%m%d")))
+
+m1 <- mPlot(x = "Date", y = "Snow.Fall", type = "Area", data = df2, height =400, width = 800)
+m1$set(pointSize = 2, lineWidth = 0.8, pointFillColors="blue")
+m1$set(smooth=TRUE)
+m1$set(hideHover = "auto")
+m1
+
+```
+
+--- #temp plot and conclusion
+
+## Average Monthly Temp in Chicago (1958-present)
+
+```{r, echo = FALSE, results = 'asis'}
+require(rCharts)
+df3 <- subset(dat[, c("Date", "Temp.Max","Temp.Min", "Temp.Mean")])
+df4 <- transform(df3, Date = as.character(strptime(df3$Date, format = "%Y%m%d")))
+
+m2 <- mPlot(x = "Date", y = c("Temp.Min", "Temp.Mean", "Temp.Max"), type = "Line", data = df4, height =400, width = 800)
+m2$set(pointSize = 1, lineWidth = 0.8, lineColors=c("red","green","blue"))
+m2$set(smooth=TRUE)
+m2$set(hideHover = "auto")
+m2
+
+```
+
+The matching snow fall and air temperature information are also available in table format under 'Data' tab. **The app link is: https://helen.shinyapps.io/ChicagoSnow/.**
+
+
+
+
