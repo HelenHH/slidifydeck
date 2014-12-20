@@ -7,9 +7,9 @@ framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : [bootstrap, interactive]            # {mathjax, quiz, bootstrap}
-ext_widgets : {rCharts: [libraries/nvd3,libraries/morris,libraries/polycharts]}
+ext_widgets : {rCharts: [libraries/morris]}
 mode        : selfcontained # {standalone, draft, selfcontained}
-knit        : slidify::knit2slides
+
 
 --- # Introduction and objectives
 
@@ -43,7 +43,7 @@ Searchable information are displayed as 'Snow Fall' graph, 'Air Temp' graph and 
 
 Search the **interactive** plots by selecting year/month in the sidebar or hovering the mouse cursor over the graph.
 
-```{r, snow, echo = FALSE, results = 'asis'}
+```{r, s1, echo = FALSE, results = 'asis'}
 require(rCharts)
 dat <- read.csv("NORR.csv")
 df1 <- subset(dat[, c("Date", "Snow.Fall")])
@@ -53,7 +53,11 @@ m1 <- mPlot(x = "Date", y = "Snow.Fall", type = "Area", data = df2, height =400,
 m1$set(pointSize = 2, lineWidth = 0.8, pointFillColors="blue")
 m1$set(smooth=TRUE)
 m1$set(hideHover = "auto")
-m1
+m1$show(cdn=TRUE)
+
+
+
+
 
 ```
 
@@ -61,21 +65,22 @@ m1
 
 ## Average Monthly Temp in Chicago (1958-present)
 
-```{r, echo = FALSE, results = 'asis'}
+```{r, s2, echo = FALSE, results = 'asis'}
 require(rCharts)
 df3 <- subset(dat[, c("Date", "Temp.Max","Temp.Min", "Temp.Mean")])
 df4 <- transform(df3, Date = as.character(strptime(df3$Date, format = "%Y%m%d")))
-
+             
 m2 <- mPlot(x = "Date", y = c("Temp.Min", "Temp.Mean", "Temp.Max"), type = "Line", data = df4, height =400, width = 800)
 m2$set(pointSize = 1, lineWidth = 0.8, lineColors=c("red","green","blue"))
 m2$set(smooth=TRUE)
 m2$set(hideHover = "auto")
-m2
+m2$show(cdn=TRUE)
+
+
+
 
 ```
 
 The matching snow fall and air temperature information are also available in table format under 'Data' tab. **The app link is: https://helen.shinyapps.io/ChicagoSnow/.**
-
-
 
 

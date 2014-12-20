@@ -7,9 +7,9 @@ framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : [bootstrap, interactive]            # {mathjax, quiz, bootstrap}
-ext_widgets : {rCharts: [libraries/nvd3,libraries/morris,libraries/polycharts]}
+ext_widgets : {rCharts: [libraries/morris]}
 mode        : selfcontained # {standalone, draft, selfcontained}
-knit        : slidify::knit2slides
+
 
 --- # Introduction and objectives
 
@@ -43,16 +43,14 @@ Searchable information are displayed as 'Snow Fall' graph, 'Air Temp' graph and 
 
 Search the **interactive** plots by selecting year/month in the sidebar or hovering the mouse cursor over the graph.
 
-<iframe src=' assets/fig/snow-1.html ' scrolling='no' frameBorder='0' seamless class='rChart morris ' id=iframe- chart1d098c2186 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
+<iframe src=' assets/fig/s1-1.html ' scrolling='no' frameBorder='0' seamless class='rChart morris ' id=iframe- chartac5218dba76 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
 
 --- #temp plot and conclusion
 
 ## Average Monthly Temp in Chicago (1958-present)
 
-<iframe src=' assets/fig/unnamed-chunk-1-1.html ' scrolling='no' frameBorder='0' seamless class='rChart morris ' id=iframe- chart1d023c96a04 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
+<iframe src=' assets/fig/s2-1.html ' scrolling='no' frameBorder='0' seamless class='rChart morris ' id=iframe- chartac575b924cb ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
 
 The matching snow fall and air temperature information are also available in table format under 'Data' tab. **The app link is: https://helen.shinyapps.io/ChicagoSnow/.**
-
-
 
 
