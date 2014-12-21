@@ -33,7 +33,7 @@ Searchable information are displayed as 'Snow Fall' graph, 'Air Temp' graph and 
 ![myapp](./assets/img/snapshot1.png)
 
 
-**This is the link to the shiny app: https://helen.shinyapps.io/ChicagoSnow/**
+**This is the link to the shiny app:  http://helenhh.shinyapps.io/chicagoSnowApp.**
 
 
 
@@ -41,16 +41,16 @@ Searchable information are displayed as 'Snow Fall' graph, 'Air Temp' graph and 
 
 ## Total Monthly Snow Fall in Chicago (1958-present)
 
-Search the **interactive** plots by selecting year/month in the sidebar or hovering the mouse cursor over the graph.
+Display the snow fall records by selecting year/month in the sidebar or hovering the mouse cursor over the graph in the app.
 
-<iframe src=' assets/fig/s1-1.html ' scrolling='no' frameBorder='0' seamless class='rChart morris ' id=iframe- chartac5218dba76 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
+<img src="assets/fig/s1-1.png" title="plot of chunk s1" alt="plot of chunk s1" style="display: block; margin: auto;" />
 
 --- #temp plot and conclusion
 
 ## Average Monthly Temp in Chicago (1958-present)
 
-<iframe src=' assets/fig/s2-1.html ' scrolling='no' frameBorder='0' seamless class='rChart morris ' id=iframe- chartac575b924cb ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
+<img src="assets/fig/s2-1.png" title="plot of chunk s2" alt="plot of chunk s2" style="display: block; margin: auto;" />
 
-The matching snow fall and air temperature information are also available in table format under 'Data' tab. **The app link is: https://helen.shinyapps.io/ChicagoSnow/.**
+The matching snow fall and air temperature information are also available in table format under 'Data' tab. **The app link is:  http://helenhh.shinyapps.io/chicagoSnowApp.**
 
 

@@ -33,7 +33,7 @@ Searchable information are displayed as 'Snow Fall' graph, 'Air Temp' graph and 
 ![myapp](./assets/img/snapshot1.png)
 
 
-**This is the link to the shiny app: https://helen.shinyapps.io/ChicagoSnow/**
+**This is the link to the shiny app:  http://helenhh.shinyapps.io/chicagoSnowApp.**
 
 
 
@@ -41,23 +41,16 @@ Searchable information are displayed as 'Snow Fall' graph, 'Air Temp' graph and 
 
 ## Total Monthly Snow Fall in Chicago (1958-present)
 
-Search the **interactive** plots by selecting year/month in the sidebar or hovering the mouse cursor over the graph.
+Display the snow fall records by selecting year/month in the sidebar or hovering the mouse cursor over the graph in the app.
 
-```{r, s1, echo = FALSE, results = 'asis'}
-require(rCharts)
+```{r, s1, echo = FALSE, fig.height = 6, fig.width=10, fig.align = 'center', message = F, results = 'asis'} 
+
+require(ggplot2)
 dat <- read.csv("NORR.csv")
 df1 <- subset(dat[, c("Date", "Snow.Fall")])
-df2 <- transform(df1, Date = as.character(strptime(df1$Date, format = "%Y%m%d")))
+df5 <- transform(df1, Date = as.POSIXct(strptime(df1$Date, format = "%Y%m%d")))
 
-m1 <- mPlot(x = "Date", y = "Snow.Fall", type = "Area", data = df2, height =400, width = 800)
-m1$set(pointSize = 2, lineWidth = 0.8, pointFillColors="blue")
-m1$set(smooth=TRUE)
-m1$set(hideHover = "auto")
-m1$show(cdn=TRUE)
-
-
-
-
+plot(df5$Date, df5$Snow.Fall, type= "l", xlab= "Year", ylab = "Snow fall (inches)", cex.lab=1.2, cex.axis=1.0, col="blue")
 
 ```
 
@@ -65,22 +58,31 @@ m1$show(cdn=TRUE)
 
 ## Average Monthly Temp in Chicago (1958-present)
 
-```{r, s2, echo = FALSE, results = 'asis'}
-require(rCharts)
-df3 <- subset(dat[, c("Date", "Temp.Max","Temp.Min", "Temp.Mean")])
-df4 <- transform(df3, Date = as.character(strptime(df3$Date, format = "%Y%m%d")))
-             
-m2 <- mPlot(x = "Date", y = c("Temp.Min", "Temp.Mean", "Temp.Max"), type = "Line", data = df4, height =400, width = 800)
-m2$set(pointSize = 1, lineWidth = 0.8, lineColors=c("red","green","blue"))
-m2$set(smooth=TRUE)
-m2$set(hideHover = "auto")
-m2$show(cdn=TRUE)
+```{r, s2, echo = FALSE, fig.height = 5, fig.width=12, fig.align = 'center', message = F, results = 'asis'}
+require(ggplot2)
+require(reshape2)
+#Temp
+dat <- read.csv("NORR.csv")
+tmp <- subset(dat[, c("Date", "Temp.Max","Temp.Min", "Temp.Mean")])
+tmp1 <- transform(tmp, Date = as.character(strptime(tmp$Date, format = "%Y%m%d")))
+tmp2 = melt(tmp1, id = "Date")
+tmp2$Date <- as.POSIXct(tmp2$Date)
+colnames(tmp2) <- c("Date", "variable", "Temp")
 
-
-
+ggplot(tmp2, aes(x = Date, y = Temp, group = variable, 
+    colour = variable)) +
+    geom_line() +
+    ylab('Temperture(F)') +
+    geom_point() +
+    theme_bw() +
+    scale_fill_discrete(name="",
+                         breaks=c("Temp.Max","Temp.Min", "Temp.Mean"),
+                         labels=c("Temp.Max","Temp.Min", "Temp.Mean")) +
+    theme(legend.position = 'right', legend.title=element_blank()) + 
+    theme(axis.title=element_text(size=14))
 
 ```
 
-The matching snow fall and air temperature information are also available in table format under 'Data' tab. **The app link is: https://helen.shinyapps.io/ChicagoSnow/.**
+The matching snow fall and air temperature information are also available in table format under 'Data' tab. **The app link is:  http://helenhh.shinyapps.io/chicagoSnowApp.**
 
 
